@@ -3,20 +3,20 @@ import Cookies from 'js-cookie'
 import * as types from '../mutation-types'
 
 // state
-export const state = {
+const state = {
   user: null,
   token: Cookies.get('token')
 }
 
 // getters
-export const getters = {
+const getters = {
   user: state => state.user,
   token: state => state.token,
   check: state => state.user !== null
 }
 
 // mutations
-export const mutations = {
+const mutations = {
   [types.SAVE_TOKEN] (state, { token, remember }) {
     state.token = token
     Cookies.set('token', token, { expires: remember ? 365 : null })
@@ -44,7 +44,7 @@ export const mutations = {
 }
 
 // actions
-export const actions = {
+const actions = {
   saveToken ({ commit, dispatch }, payload) {
     commit(types.SAVE_TOKEN, payload)
   },
@@ -77,3 +77,12 @@ export const actions = {
     return data.url
   }
 }
+
+export default {
+  namespaced: true,
+  state,
+  getters,
+  actions,
+  mutations
+}
+

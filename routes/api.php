@@ -22,6 +22,12 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::patch('settings/profile', 'Settings\ProfileController@update');
     Route::patch('settings/password', 'Settings\PasswordController@update');
+
+    //accounting
+    Route::get('gls', 'GLController@getGL');
+    Route::get('departments', 'GLController@getDepartments');
+    //Route::get('gls/{id}', 'GLController@getSpecificGL');
+    //Route::get('gls/chart_department/{glaccountcode}', 'GLController@getChartDepartment');
 });
 
 Route::group(['middleware' => 'guest:api'], function () {

@@ -12,7 +12,14 @@ export default [
   { path: '/email/verify/:id', name: 'verification.verify', component: page('auth/verification/verify.vue') },
   { path: '/email/resend', name: 'verification.resend', component: page('auth/verification/resend.vue') },
 
-  { path: '/home', name: 'home', component: page('home.vue') },
+  { path: '/home', name: 'home', component: page('home.vue'),
+    children: [
+      { path: '/userhome', name: 'userhome', component: page('accounting/UserDash.vue')},
+      { path: '/acctgsettings', name: 'acctgsettings', component: page('accounting/AcctgSettings.vue')},
+      { path: '/acctggl', name: 'acctggl', component: page('accounting/GL.vue')},
+      { path: '/acctgsl', name: 'acctgsl', component: page('accounting/SL.vue')},
+    ]
+  },
   { path: '/settings',
     component: page('settings/index.vue'),
     children: [

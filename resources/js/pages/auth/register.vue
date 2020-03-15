@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row mt-4">
     <div class="col-lg-8 m-auto">
       <card v-if="mustVerifyEmail" :title="$t('register')">
         <div class="alert alert-success" role="alert">

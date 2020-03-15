@@ -2,8 +2,10 @@
   <div class="main-layout">
     <navbar />
 
-    <div class="container mt-4">
+    <div>
+
       <child />
+
     </div>
   </div>
 </template>

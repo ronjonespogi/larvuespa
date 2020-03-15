@@ -1,36 +1,48 @@
 <template>
-  <card :title="$t('your_info')">
-    <form @submit.prevent="update" @keydown="form.onKeydown($event)">
-      <alert-success :form="form" :message="$t('info_updated')" />
+<div class="container">
 
-      <!-- Name -->
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('name') }}</label>
-        <div class="col-md-7">
-          <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name">
-          <has-error :form="form" field="name" />
-        </div>
-      </div>
+    <card :title="$t('your_info')">
+      <form @submit.prevent="update" @keydown="form.onKeydown($event)">
+        <alert-success :form="form" :message="$t('info_updated')" />
 
-      <!-- Email -->
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
-        <div class="col-md-7">
-          <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
-          <has-error :form="form" field="email" />
+        <!-- Name -->
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label text-md-right">{{ $t('name') }}</label>
+          <div class="col-md-7">
+            <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name">
+            <has-error :form="form" field="name" />
+          </div>
         </div>
-      </div>
 
-      <!-- Submit Button -->
-      <div class="form-group row">
-        <div class="col-md-9 ml-md-auto">
-          <v-button :loading="form.busy" type="success">
-            {{ $t('update') }}
-          </v-button>
+        <!-- Email -->
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
+          <div class="col-md-7">
+            <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
+            <has-error :form="form" field="email" />
+          </div>
         </div>
-      </div>
-    </form>
-  </card>
+
+         <!-- First Name -->
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label text-md-right">First Name</label>
+          <div class="col-md-7">
+            <input v-model="form.first_name" :class="{ 'is-invalid': form.errors.has('first_name') }" class="form-control" type="text" name="first_name">
+            <has-error :form="form" field="first_name" />
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group row">
+          <div class="col-md-9 ml-md-auto">
+            <v-button :loading="form.busy" type="success">
+              {{ $t('update') }}
+            </v-button>
+          </div>
+        </div>
+      </form>
+    </card>
+</div>
 </template>
 
 <script>
@@ -47,7 +59,8 @@ export default {
   data: () => ({
     form: new Form({
       name: '',
-      email: ''
+      email: '',
+      first_name: '',
     })
   }),
 
