@@ -1,163 +1,173 @@
 <template>
   <div class="mr-4 ml-4 mb-4">
-
-    <h4>General Ledger Management</h4>
-    <div class="row ml-4">
-      <div class="col-md-5">
-          <div v-if="loaded">
-            <ul v-if="majorGL !== null">
-              <li v-for="x in majorGL" :key="x.id">
-                <!-- level one -->
-                  <h5> {{ x.gl_description }} </h5>
-                <ul v-for="p1 in majorGL.parent1" :key="p1.id" >
-                    <li v-if="x.gl_account_code == p1.gl_parent_code">
-                      <!-- level two -->
-                      <div>
-                        <b-link> {{ p1.gl_account_code }} {{ p1.gl_description }} </b-link>
-                      </div>
-                      <ul v-for="p2 in majorGL.parent2" :key="p2.id" >
-                        <li v-if="p1.gl_account_code == p2.gl_parent_code">
-                          <!-- level three -->
-                          <div >
-                            <b-link v-on:click="getSpecificGL(
-                              p2.gl_account_code, p2.gl_major_code, p2.gl_description, p2.gl_parent_code,
-                              p2.gl_level, p2.is_disabled
-                              )">
-                              {{ p2.gl_account_code }} {{ p2.gl_description }}
-                            </b-link>
-                          </div>
-                          <ul v-for="p3 in majorGL.parent3" :key="p3.id" >
-                            <li v-if="p2.gl_account_code == p3.gl_parent_code">
-                              <!-- level four -->
-                              <div >
-                                <b-link v-on:click="getSpecificGL(
-                                  p3.gl_account_code, p3.gl_major_code, p3.gl_description, p3.gl_parent_code,
-                                  p3.gl_level, p3.is_disabled
-                                  )">
-                                  {{ p3.gl_account_code }} {{ p3.gl_description }}
-                                </b-link>
-                              </div>
-                              <ul  v-for="p4 in majorGL.parent4" :key="p4.id" >
-                                <li v-if="p3.gl_account_code == p4.gl_parent_code">
-                                  <!-- level five -->
-                                  <div >
-                                    <b-link v-on:click="getSpecificGL(
-                                      p4.gl_account_code, p4.gl_major_code, p4.gl_description, p4.gl_parent_code,
-                                      p4.gl_level, p4.is_disabled
-                                      )">
-                                      {{ p4.gl_account_code }} {{ p4.gl_description }}
-                                    </b-link>
-                                  </div>
-                                  <ul  v-for="p5 in majorGL.parent5" :key="p5.id" >
-                                    <li v-if="p4.gl_account_code == p5.gl_parent_code">
-                                      <!-- level six -->
-                                      <div >
-                                        <b-link> {{ p5.gl_account_code }} {{ p5.gl_description }} </b-link>
-                                      </div>
-                                    </li>
-                                  </ul>
-                                </li>
-                              </ul>
-                            </li>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card mt-4">
+              <div class="card-header">
+                <h5>General Ledger Management</h5>
+              </div>
+              <div class="card-body">
+                    <div v-if="loaded">
+                      <ul v-if="majorGL !== null">
+                        <li v-for="x in majorGL" :key="x.id">
+                          <!-- level one -->
+                            <h5> {{ x.gl_description }} </h5>
+                          <ul v-for="p1 in majorGL.parent1" :key="p1.id" >
+                              <li v-if="x.gl_account_code == p1.gl_parent_code">
+                                <!-- level two -->
+                                <div>
+                                  <b-link> {{ p1.gl_account_code }} {{ p1.gl_description }} </b-link>
+                                </div>
+                                <ul v-for="p2 in majorGL.parent2" :key="p2.id" >
+                                  <li v-if="p1.gl_account_code == p2.gl_parent_code">
+                                    <!-- level three -->
+                                    <div >
+                                      <b-link v-on:click="getSpecificGL(
+                                        p2.gl_account_code, p2.gl_major_code, p2.gl_description, p2.gl_parent_code,
+                                        p2.gl_level, p2.is_disabled
+                                        )">
+                                        {{ p2.gl_account_code }} {{ p2.gl_description }}
+                                      </b-link>
+                                    </div>
+                                    <ul v-for="p3 in majorGL.parent3" :key="p3.id" >
+                                      <li v-if="p2.gl_account_code == p3.gl_parent_code">
+                                        <!-- level four -->
+                                        <div >
+                                          <b-link v-on:click="getSpecificGL(
+                                            p3.gl_account_code, p3.gl_major_code, p3.gl_description, p3.gl_parent_code,
+                                            p3.gl_level, p3.is_disabled
+                                            )">
+                                            {{ p3.gl_account_code }} {{ p3.gl_description }}
+                                          </b-link>
+                                        </div>
+                                        <ul  v-for="p4 in majorGL.parent4" :key="p4.id" >
+                                          <li v-if="p3.gl_account_code == p4.gl_parent_code">
+                                            <!-- level five -->
+                                            <div >
+                                              <b-link v-on:click="getSpecificGL(
+                                                p4.gl_account_code, p4.gl_major_code, p4.gl_description, p4.gl_parent_code,
+                                                p4.gl_level, p4.is_disabled
+                                                )">
+                                                {{ p4.gl_account_code }} {{ p4.gl_description }}
+                                              </b-link>
+                                            </div>
+                                            <ul  v-for="p5 in majorGL.parent5" :key="p5.id" >
+                                              <li v-if="p4.gl_account_code == p5.gl_parent_code">
+                                                <!-- level six -->
+                                                <div >
+                                                  <b-link> {{ p5.gl_account_code }} {{ p5.gl_description }} </b-link>
+                                                </div>
+                                              </li>
+                                            </ul>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                              </li>
                           </ul>
                         </li>
                       </ul>
-                    </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div v-else>
-            <p>General Ledgers Not Loaded</p>
-          </div>
-      </div>
-      <div class="col-md-6 mr-4">
-        <div class="float-right" style="width:100%;position: sticky;top: 0;">
-          <div class="card card-body" style="min-height:700px">
-            <h5>General Ledger Details</h5>
-            <div class="col mt-4">
-              <b-form @submit="onSubmit" @reset="onReset">
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <b-form-group id="input-group-3" label="Major GL" label-for="input-3">
-                          <b-form-select
-                            id="input-3"
-                            v-model="form.gl_major_code"
-                            :options="glMajorOptions"
-                            required
-                          ></b-form-select>
-                        </b-form-group>
                     </div>
-                    <div class="col">
-                        <b-form-group id="input-group-3" label="Parent GL" label-for="input-3">
-                          <b-form-select
-                            id="input-3"
-                            v-model="form.gl_parent_code"
-                            :options="glParents"
-                            required
-                          ></b-form-select>
-                        </b-form-group>
+                    <div v-else>
+                      <p>General Ledgers Not Loaded</p>
                     </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-4">
-                    <b-form-group id="input-group-1" label="GL Account Code" label-for="input-1">
-                      <div class="input-group">
-                        <b-form-input v-model="form.gl_parent_code" type="text" class="text-right" readonly></b-form-input>
-                        <b-form-input v-model="form.gl_account_code" type="text" required></b-form-input>
-
-                      </div>
-                    </b-form-group>
-                  </div>
-                  <div class="col">
-                      <b-form-group label="GL Description" label-for="input-2">
-                        <b-form-input v-model="form.gl_description" required></b-form-input>
-                      </b-form-group>
-                  </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <b-form-group id="input-group-3" label="GL Type" label-for="input-3">
-                          <b-form-select
-                            id="input-3"
-                            v-model="form.gl_level"
-                            :options="glLevel"
-                            required
-                          ></b-form-select>
-                        </b-form-group>
-                    </div>
-                    <div class="col-md-4">
-                        <b-form-group id="input-group-3" label="Status" label-for="input-3">
-                          <b-form-select
-                            id="input-3"
-                            v-model="form.is_disabled"
-                            :options="glStatus"
-                            required
-                          ></b-form-select>
-                        </b-form-group>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                  <div class="col">
-                    <p>Usable on Departments:</p>
-
-                  </div>
-                </div>
-
-                <div class="float-right mt-4">
-                  <b-button type="submit" variant="success">Save Changes</b-button>
-                </div>
-
-
-              </b-form>
+              </div>
             </div>
           </div>
+          <div class="col-md-6">
+              <div class="float-right mt-4" style="width:100%; position: sticky; top: 0;">
+                <div class="card" style="min-height:700px">
+                  <div class="card-header">
+                    <h5>General Ledger Details</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="col mt-4">
+                      <b-form @submit="onSubmit" @reset="onReset">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <b-form-group id="input-group-3" label="Major GL" label-for="input-3">
+                                  <b-form-select
+                                    id="input-3"
+                                    v-model="form.gl_major_code"
+                                    :options="glMajorOptions"
+                                    required
+                                  ></b-form-select>
+                                </b-form-group>
+                            </div>
+                            <div class="col">
+                                <b-form-group id="input-group-3" label="Parent GL" label-for="input-3">
+                                  <b-form-select
+                                    id="input-3"
+                                    v-model="form.gl_parent_code"
+                                    :options="glParents"
+                                    required
+                                  ></b-form-select>
+                                </b-form-group>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-4">
+                            <b-form-group id="input-group-1" label="GL Account Code" label-for="input-1">
+                              <div class="input-group">
+                                <b-form-input v-model="form.gl_parent_code" type="text" class="text-right" readonly></b-form-input>
+                                <b-form-input v-model="form.gl_account_code" type="text" required></b-form-input>
+
+                              </div>
+                            </b-form-group>
+                          </div>
+                          <div class="col">
+                              <b-form-group label="GL Description" label-for="input-2">
+                                <b-form-input v-model="form.gl_description" required></b-form-input>
+                              </b-form-group>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <b-form-group id="input-group-3" label="GL Type" label-for="input-3">
+                                  <b-form-select
+                                    id="input-3"
+                                    v-model="form.gl_level"
+                                    :options="glLevel"
+                                    required
+                                  ></b-form-select>
+                                </b-form-group>
+                            </div>
+                            <div class="col-md-4">
+                                <b-form-group id="input-group-3" label="Status" label-for="input-3">
+                                  <b-form-select
+                                    id="input-3"
+                                    v-model="form.is_disabled"
+                                    :options="glStatus"
+                                    required
+                                  ></b-form-select>
+                                </b-form-group>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                          <div class="col">
+                            <p>Usable on Departments:</p>
+
+                          </div>
+                        </div>
+
+                        <div class="float-right mt-4">
+                          <b-button type="submit" variant="success">Save Changes</b-button>
+                        </div>
+
+
+                      </b-form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
         </div>
-      </div>
-    </div>
+
 
   </div>
 </template>
@@ -350,15 +360,13 @@
 
     mounted() {
       //make it false to force load it
-      this.loaded = false;
-      if(this.loaded == false){
-        this.loadGLs();
-        this.getmajorGL();
-      }
-      else{
-        this.getmajorGL();
-        console.log(this.majorGL);
-      }
+
+      this.loadGLs();
+      this.getmajorGL();
+
+      this.getmajorGL();
+      console.log(this.majorGL);
+
 
       this.loadDepartments();
       console.log(this.departments);
@@ -368,3 +376,6 @@
 
   }
 </script>
+<style scoped>
+
+</style>

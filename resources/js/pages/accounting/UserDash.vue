@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="card card-body" style="min-height: 700px;">
+  <div>
+    <div class="card card-body mt-4" style="min-height: 700px;">
       <div class="row">
         <div class="col">
           <h4 class="font-weight-light">User Information</h4>
